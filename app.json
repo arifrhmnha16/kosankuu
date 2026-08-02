@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "Manzsa Residence",
+    "slug": "manzsa-residence",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "manzsaresidence",
+    "userInterfaceStyle": "light",
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FBFDFF"
+    },
+    "android": {
+      "package": "com.manzsaresidence.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundColor": "#EFF8FF"
+      },
+      "predictiveBackGestureEnabled": true
+    },
+    "web": {
+      "output": "static",
+      "bundler": "metro",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 92,
+          "resizeMode": "contain",
+          "backgroundColor": "#FBFDFF"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
