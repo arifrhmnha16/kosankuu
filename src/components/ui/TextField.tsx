@@ -8,7 +8,7 @@ import { fontFamilies } from '@/design/typography';
 
 import { AppText } from './AppText';
 
-export interface TextFieldProps extends TextInputProps { label: string; error?: string; helperText?: string; }
+export interface TextFieldProps extends TextInputProps { label: string; error?: string | undefined; helperText?: string | undefined; }
 
 export const TextField = forwardRef<TextInput, TextFieldProps>(function TextField({ label, error, helperText, editable = true, style, onFocus, onBlur, ...props }, ref) {
   const [focused, setFocused] = useState(false);

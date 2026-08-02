@@ -6,6 +6,10 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^lucide-react-native$': '<rootDir>/__mocks__/lucide-react-native.tsx',
+    '^firebase/auth$': '<rootDir>/__mocks__/firebase-auth.ts',
+    '^firebase/firestore$': '<rootDir>/__mocks__/firebase-firestore.ts',
+    '^firebase/app$': '<rootDir>/__mocks__/firebase-app.ts',
+    '^@/services/firebase/auth$': '<rootDir>/__mocks__/firebase-auth-service.ts',
   },
   collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts'],
 };
