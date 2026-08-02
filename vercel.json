@@ -2,5 +2,10 @@
   "buildCommand": "npm run export:web",
   "outputDirectory": "dist",
   "framework": null,
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/rooms/:roomId", "destination": "/rooms/[roomId].html" },
+    { "source": "/owner/rooms/:roomId/edit", "destination": "/owner/rooms/[roomId]/edit.html" },
+    { "source": "/owner/rooms/:roomId", "destination": "/owner/rooms/[roomId].html" }
+  ]
 }

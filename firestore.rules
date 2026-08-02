@@ -10,9 +10,72 @@ service cloud.firestore {
       return isSignedIn() && request.auth.uid == userId;
     }
 
+    function userProfile() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isActiveOwner(propertyId) {
+      return isSignedIn()
+        && userProfile().role == 'owner'
+        && userProfile().status == 'active'
+        && userProfile().propertyId == propertyId;
+    }
+
+    function propertyIsPublic(propertyId) {
+      return get(/databases/$(database)/documents/properties/$(propertyId)).data.isPublished == true;
+    }
+
+    function roomFieldsAreValid(data, propertyId) {
+      return data.keys().hasOnly([
+          'propertyId', 'code', 'name', 'floor', 'status', 'monthlyPrice',
+          'dailyPrice', 'hourlyPrice', 'depositAmount', 'capacity', 'size',
+          'facilities', 'description', 'coverImageUrl', 'imageUrls',
+          'imageStoragePaths', 'isPublished', 'isDeleted',
+          'minimumRentalMonths', 'internalNote', 'createdAt', 'updatedAt'
+        ])
+        && data.keys().hasAll([
+          'propertyId', 'code', 'name', 'status', 'monthlyPrice', 'capacity',
+          'facilities', 'description', 'imageUrls', 'imageStoragePaths',
+          'isPublished', 'isDeleted', 'createdAt', 'updatedAt'
+        ])
+        && data.propertyId == propertyId
+        && data.code is string && data.code.size() > 0
+        && data.name is string && data.name.size() > 0
+        && data.status in ['available', 'reserved', 'occupied', 'maintenance', 'inactive']
+        && data.monthlyPrice is number && data.monthlyPrice >= 0
+        && data.capacity is int && data.capacity >= 1
+        && data.facilities is list
+        && data.imageUrls is list
+        && data.imageStoragePaths is list
+        && data.isPublished is bool
+        && data.isDeleted is bool;
+    }
+
     match /users/{userId} {
       allow read: if isOwnUserDocument(userId);
       allow create, update, delete: if false;
+    }
+
+    match /properties/{propertyId} {
+      allow read: if resource.data.isPublished == true || isActiveOwner(propertyId);
+      allow create, update, delete: if false;
+
+      match /rooms/{roomId} {
+        allow read: if isActiveOwner(propertyId)
+          || (propertyIsPublic(propertyId)
+            && resource.data.isPublished == true
+            && resource.data.isDeleted == false);
+        allow create: if isActiveOwner(propertyId)
+          && roomFieldsAreValid(request.resource.data, propertyId)
+          && request.resource.data.createdAt == request.time
+          && request.resource.data.updatedAt == request.time;
+        allow update: if isActiveOwner(propertyId)
+          && roomFieldsAreValid(request.resource.data, propertyId)
+          && request.resource.data.propertyId == resource.data.propertyId
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.updatedAt == request.time;
+        allow delete: if false;
+      }
     }
 
     match /{document=**} {

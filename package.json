@@ -11,8 +11,8 @@
     "typecheck": "tsc --noEmit",
     "test": "npm run test:unit",
     "test:unit": "jest --runInBand",
-    "test:rules": "firebase emulators:exec --project demo-manzsa-residence --only firestore \"jest --config jest.rules.config.js --runInBand\"",
-    "firebase:emulators": "firebase emulators:start --project demo-manzsa-residence --only firestore",
+    "test:rules": "firebase emulators:exec --project demo-manzsa-residence --only firestore,storage \"jest --config jest.rules.config.js --runInBand\"",
+    "firebase:emulators": "firebase emulators:start --project demo-manzsa-residence --only firestore,storage",
     "export:web": "expo export --platform web"
   },
   "dependencies": {
@@ -25,6 +25,9 @@
     "expo": "~57.0.9",
     "expo-constants": "~57.0.8",
     "expo-font": "~57.0.1",
+    "expo-image": "~57.0.1",
+    "expo-image-manipulator": "~57.0.7",
+    "expo-image-picker": "~57.0.7",
     "expo-linking": "~57.0.4",
     "expo-router": "~57.0.9",
     "expo-splash-screen": "~57.0.5",

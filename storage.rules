@@ -2,6 +2,30 @@ rules_version = '2';
 
 service firebase.storage {
   match /b/{bucket}/o {
+    function ownerProfile() {
+      return firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isActiveOwner(propertyId) {
+      return request.auth != null
+        && ownerProfile().role == 'owner'
+        && ownerProfile().status == 'active'
+        && ownerProfile().propertyId == propertyId;
+    }
+
+    function isValidRoomImage() {
+      return request.resource.size <= 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/(jpeg|png|webp)');
+    }
+
+    match /properties/{propertyId}/rooms/{roomId}/{fileName} {
+      allow read: if firestore.get(/databases/(default)/documents/properties/$(propertyId)).data.isPublished == true
+        && firestore.get(/databases/(default)/documents/properties/$(propertyId)/rooms/$(roomId)).data.isPublished == true
+        && firestore.get(/databases/(default)/documents/properties/$(propertyId)/rooms/$(roomId)).data.isDeleted == false;
+      allow create, update: if isActiveOwner(propertyId) && isValidRoomImage();
+      allow delete: if isActiveOwner(propertyId);
+    }
+
     match /{path=**} {
       allow read, write: if false;
     }

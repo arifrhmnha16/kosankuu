@@ -8,6 +8,7 @@ module.exports = {
     '^lucide-react-native$': '<rootDir>/__mocks__/lucide-react-native.tsx',
     '^firebase/auth$': '<rootDir>/__mocks__/firebase-auth.ts',
     '^firebase/firestore$': '<rootDir>/__mocks__/firebase-firestore.ts',
+    '^firebase/storage$': '<rootDir>/__mocks__/firebase-storage.ts',
     '^firebase/app$': '<rootDir>/__mocks__/firebase-app.ts',
     '^@/services/firebase/auth$': '<rootDir>/__mocks__/firebase-auth-service.ts',
   },
