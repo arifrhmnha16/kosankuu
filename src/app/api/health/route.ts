@@ -1,0 +1,1 @@
+import{NextResponse}from"next/server";import{integrationStatus}from"@/lib/env";export function GET(){const integrations=integrationStatus();return NextResponse.json({status:"ok",app:"Manzsa Residence",timestamp:new Date().toISOString(),integrations})}

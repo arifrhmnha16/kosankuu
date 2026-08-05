@@ -1,0 +1,1 @@
+import{NextResponse}from"next/server";export function apiError(error:unknown,status=400){const message=error instanceof Error?error.message:"Permintaan tidak dapat diproses.";return NextResponse.json({error:process.env.NODE_ENV==="production"&&status>=500?"Terjadi kesalahan server.":message},{status})}

@@ -1,0 +1,1 @@
+import{describe,expect,it}from"vitest";import{owns}from"@/lib/permissions";describe("permissions",()=>{it("tenant hanya memiliki datanya",()=>{expect(owns({uid:"a",role:"tenant"} as never,"a")).toBe(true);expect(owns({uid:"a",role:"tenant"} as never,"b")).toBe(false)});it("owner dapat mengakses data operasional",()=>expect(owns({uid:"o",role:"owner"} as never,"b")).toBe(true))});

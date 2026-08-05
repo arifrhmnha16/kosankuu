@@ -1,0 +1,27 @@
+[
+  {
+    "viewport": "1536x960",
+    "differentPixels": 181354,
+    "ratio": 0.12298855251736111
+  },
+  {
+    "viewport": "390x844",
+    "differentPixels": 60330,
+    "ratio": 0.18328472475391908
+  },
+  {
+    "viewport": "768x1024",
+    "differentPixels": 158268,
+    "ratio": 0.2012481689453125
+  },
+  {
+    "viewport": "1366x768",
+    "differentPixels": 147473,
+    "ratio": 0.140572573511469
+  },
+  {
+    "viewport": "1920x1080",
+    "differentPixels": 188106,
+    "ratio": 0.09071469907407408
+  }
+]

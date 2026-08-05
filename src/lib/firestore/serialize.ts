@@ -1,0 +1,3 @@
+import type{DocumentSnapshot,QueryDocumentSnapshot}from"firebase-admin/firestore";
+function value(input:unknown):unknown{if(input&&typeof input==="object"&&"toDate"in input&&typeof(input as{toDate?:unknown}).toDate==="function")return(input as{toDate():Date}).toDate().toISOString();if(Array.isArray(input))return input.map(value);if(input&&typeof input==="object")return Object.fromEntries(Object.entries(input).map(([k,v])=>[k,value(v)]));return input}
+export function serializeDoc(doc:DocumentSnapshot|QueryDocumentSnapshot):Record<string,unknown>&{id:string}{return{id:doc.id,...value(doc.data()||{}) as Record<string,unknown>}}

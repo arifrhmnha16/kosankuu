@@ -1,0 +1,1 @@
+"use client";export default function ErrorPage({reset}:{error:Error&{digest?:string};reset:()=>void}){return <main className="section"><div className="container empty"><h1>Halaman gagal dimuat</h1><p className="muted">Terjadi kendala sementara. Silakan coba kembali.</p><button className="button dark" onClick={reset}>Coba lagi</button></div></main>}

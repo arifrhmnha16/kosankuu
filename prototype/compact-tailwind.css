@@ -1,0 +1,40 @@
+/* Compact design tokens: visual desktop setara kira-kira 80%, tanpa zoom/transform. */
+body, button, input, select, textarea { font-family: 'Montserrat', sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Cormorant Garamond', serif; }
+@media (min-width: 1024px) {
+  html { font-size: 80%; }
+  body { padding-top: 68px !important; }
+  [data-public-header] nav,
+  body > header nav { height: 68px !important; }
+  [data-mobile-menu] { top: 68px !important; }
+  html { scroll-padding-top: 68px !important; }
+  body.landing-page { padding-top: 0 !important; }
+  body.landing-page #beranda { padding-top: 68px !important; }
+  #beranda { min-height: auto !important; }
+  #beranda [role="img"]:nth-child(1) { width: 192px !important; height: 128px !important; }
+  #beranda [role="img"]:nth-child(2) { width: 288px !important; height: 176px !important; }
+  #beranda [role="img"]:nth-child(3) { width: 200px !important; height: 136px !important; }
+  #beranda > div:last-of-type { height: 280px !important; }
+  #kamar article > img { height: 192px !important; }
+  #galeri .auto-rows-\[180px\] { grid-auto-rows: 144px !important; }
+  main > section:first-child .auto-rows-\[150px\] { grid-auto-rows: 120px !important; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  html { font-size: 90%; }
+  body { padding-top: 76px !important; }
+  [data-public-header] nav,
+  body > header nav { height: 76px !important; }
+  [data-mobile-menu] { top: 76px !important; }
+  html { scroll-padding-top: 76px !important; }
+  body.landing-page { padding-top: 0 !important; }
+  body.landing-page #beranda { padding-top: 76px !important; }
+}
+@media (max-width: 767px) {
+  body { padding-top: 64px !important; }
+  [data-public-header] nav,
+  body > header nav { height: 64px !important; }
+  [data-mobile-menu] { top: 64px !important; }
+  html { scroll-padding-top: 64px !important; }
+  body.landing-page { padding-top: 0 !important; }
+  body.landing-page #beranda { padding-top: 64px !important; }
+}

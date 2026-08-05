@@ -1,13 +1,14 @@
-{
-  "indexes": [
-    {
-      "collectionGroup": "rooms",
-      "queryScope": "COLLECTION",
-      "fields": [
-        { "fieldPath": "isPublished", "order": "ASCENDING" },
-        { "fieldPath": "isDeleted", "order": "ASCENDING" }
-      ]
-    }
-  ],
-  "fieldOverrides": []
-}
+{"indexes":[
+  {"collectionGroup":"rooms","queryScope":"COLLECTION","fields":[{"fieldPath":"isPublic","order":"ASCENDING"},{"fieldPath":"status","order":"ASCENDING"},{"fieldPath":"isFeatured","order":"DESCENDING"}]},
+  {"collectionGroup":"bookings","queryScope":"COLLECTION","fields":[{"fieldPath":"roomId","order":"ASCENDING"},{"fieldPath":"status","order":"ASCENDING"},{"fieldPath":"startAt","order":"ASCENDING"}]},
+  {"collectionGroup":"bookings","queryScope":"COLLECTION","fields":[{"fieldPath":"tenantId","order":"ASCENDING"},{"fieldPath":"createdAt","order":"DESCENDING"}]},
+  {"collectionGroup":"bookings","queryScope":"COLLECTION","fields":[{"fieldPath":"status","order":"ASCENDING"},{"fieldPath":"expiresAt","order":"ASCENDING"}]},
+  {"collectionGroup":"payments","queryScope":"COLLECTION","fields":[{"fieldPath":"tenantId","order":"ASCENDING"},{"fieldPath":"createdAt","order":"DESCENDING"}]},
+  {"collectionGroup":"payments","queryScope":"COLLECTION","fields":[{"fieldPath":"status","order":"ASCENDING"},{"fieldPath":"createdAt","order":"DESCENDING"}]},
+  {"collectionGroup":"invoices","queryScope":"COLLECTION","fields":[{"fieldPath":"tenantId","order":"ASCENDING"},{"fieldPath":"issuedAt","order":"DESCENDING"}]},
+  {"collectionGroup":"complaints","queryScope":"COLLECTION","fields":[{"fieldPath":"tenantId","order":"ASCENDING"},{"fieldPath":"createdAt","order":"DESCENDING"}]},
+  {"collectionGroup":"complaints","queryScope":"COLLECTION","fields":[{"fieldPath":"status","order":"ASCENDING"},{"fieldPath":"priority","order":"ASCENDING"},{"fieldPath":"createdAt","order":"DESCENDING"}]},
+  {"collectionGroup":"announcements","queryScope":"COLLECTION","fields":[{"fieldPath":"status","order":"ASCENDING"},{"fieldPath":"publishedAt","order":"DESCENDING"}]},
+  {"collectionGroup":"notifications","queryScope":"COLLECTION","fields":[{"fieldPath":"userId","order":"ASCENDING"},{"fieldPath":"createdAt","order":"DESCENDING"}]},
+  {"collectionGroup":"bookingLocks","queryScope":"COLLECTION","fields":[{"fieldPath":"bookingId","order":"ASCENDING"}]}
+],"fieldOverrides":[]}

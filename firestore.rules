@@ -1,85 +1,27 @@
 rules_version = '2';
-
 service cloud.firestore {
   match /databases/{database}/documents {
-    function isSignedIn() {
-      return request.auth != null;
-    }
+    function signedIn() { return request.auth != null; }
+    function owner() { return signedIn() && request.auth.token.role == 'owner'; }
+    function tenant(uid) { return signedIn() && request.auth.uid == uid; }
+    function immutableRole() { return !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role','uid','status']); }
 
-    function isOwnUserDocument(userId) {
-      return isSignedIn() && request.auth.uid == userId;
-    }
-
-    function userProfile() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
-    }
-
-    function isActiveOwner(propertyId) {
-      return isSignedIn()
-        && userProfile().role == 'owner'
-        && userProfile().status == 'active'
-        && userProfile().propertyId == propertyId;
-    }
-
-    function propertyIsPublic(propertyId) {
-      return get(/databases/$(database)/documents/properties/$(propertyId)).data.isPublished == true;
-    }
-
-    function roomFieldsAreValid(data, propertyId) {
-      return data.keys().hasOnly([
-          'propertyId', 'code', 'name', 'floor', 'status', 'monthlyPrice',
-          'dailyPrice', 'hourlyPrice', 'depositAmount', 'capacity', 'size',
-          'facilities', 'description', 'coverImageUrl', 'imageUrls',
-          'imageStoragePaths', 'isPublished', 'isDeleted',
-          'minimumRentalMonths', 'internalNote', 'createdAt', 'updatedAt'
-        ])
-        && data.keys().hasAll([
-          'propertyId', 'code', 'name', 'status', 'monthlyPrice', 'capacity',
-          'facilities', 'description', 'imageUrls', 'imageStoragePaths',
-          'isPublished', 'isDeleted', 'createdAt', 'updatedAt'
-        ])
-        && data.propertyId == propertyId
-        && data.code is string && data.code.size() > 0
-        && data.name is string && data.name.size() > 0
-        && data.status in ['available', 'reserved', 'occupied', 'maintenance', 'inactive']
-        && data.monthlyPrice is number && data.monthlyPrice >= 0
-        && data.capacity is int && data.capacity >= 1
-        && data.facilities is list
-        && data.imageUrls is list
-        && data.imageStoragePaths is list
-        && data.isPublished is bool
-        && data.isDeleted is bool;
-    }
-
-    match /users/{userId} {
-      allow read: if isOwnUserDocument(userId);
-      allow create, update, delete: if false;
-    }
-
-    match /properties/{propertyId} {
-      allow read: if resource.data.isPublished == true || isActiveOwner(propertyId);
-      allow create, update, delete: if false;
-
-      match /rooms/{roomId} {
-        allow read: if isActiveOwner(propertyId)
-          || (propertyIsPublic(propertyId)
-            && resource.data.isPublished == true
-            && resource.data.isDeleted == false);
-        allow create: if isActiveOwner(propertyId)
-          && roomFieldsAreValid(request.resource.data, propertyId)
-          && request.resource.data.createdAt == request.time
-          && request.resource.data.updatedAt == request.time;
-        allow update: if isActiveOwner(propertyId)
-          && roomFieldsAreValid(request.resource.data, propertyId)
-          && request.resource.data.propertyId == resource.data.propertyId
-          && request.resource.data.createdAt == resource.data.createdAt
-          && request.resource.data.updatedAt == request.time;
-        allow delete: if false;
-      }
-    }
-
-    match /{document=**} {
-      allow read, write: if false;
-    }
+    match /rooms/{id} { allow read: if owner() || (resource.data.isPublic == true && resource.data.status != 'inactive' && (!('archivedAt' in resource.data) || resource.data.archivedAt == null)); allow write: if false; }
+    match /propertySettings/{id} { allow read: if resource.data.isPublic == true || owner(); allow write: if false; }
+    match /facilities/{id} { allow read: if resource.data.isPublic == true || owner(); allow write: if false; }
+    match /gallery/{id} { allow read: if resource.data.isPublic == true || owner(); allow write: if false; }
+    match /users/{uid} { allow read: if tenant(uid) || owner(); allow write: if false; }
+    match /bookings/{id} { allow read: if owner() || (signedIn() && resource.data.tenantId == request.auth.uid); allow write: if false; }
+    match /invoices/{id} { allow read: if owner() || (signedIn() && resource.data.tenantId == request.auth.uid); allow write: if false; }
+    match /payments/{id} { allow read: if owner() || (signedIn() && resource.data.tenantId == request.auth.uid); allow write: if false; }
+    match /complaints/{id} { allow read: if owner() || (signedIn() && resource.data.tenantId == request.auth.uid); allow write: if false; match /histories/{history} { allow read: if owner() || (signedIn() && get(/databases/$(database)/documents/complaints/$(id)).data.tenantId == request.auth.uid); allow write: if false; } }
+    match /announcements/{id} { allow read: if owner() || (signedIn() && resource.data.status == 'published' && (!('publishedAt' in resource.data) || resource.data.publishedAt <= request.time) && (!('expiresAt' in resource.data) || resource.data.expiresAt == null || resource.data.expiresAt > request.time) && (resource.data.audienceType == 'all' || (resource.data.audienceType == 'tenant' && resource.data.targetUserId == request.auth.uid) || (resource.data.audienceType == 'room' && resource.data.targetRoomId == get(/databases/$(database)/documents/users/$(request.auth.uid)).data.activeRoomId))); allow write: if false; }
+    match /notifications/{id} { allow read: if owner() || (signedIn() && resource.data.userId == request.auth.uid); allow write: if false; }
+    match /activities/{id} { allow read: if owner() || (signedIn() && resource.data.actorId == request.auth.uid); allow write: if false; }
+    match /bookingLocks/{id} { allow read, write: if false; }
+    match /counters/{id} { allow read, write: if false; }
+    match /emailEvents/{id} { allow read, write: if false; }
+    match /webhookEvents/{id} { allow read, write: if false; }
+    match /{document=**} { allow read, write: if false; }
   }
 }

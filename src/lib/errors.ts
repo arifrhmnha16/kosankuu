@@ -1,0 +1,4 @@
+import{ZodError}from"zod";import type{ActionResult}from"@/types/api";
+export class AppError extends Error{constructor(public code:string,message:string,public status=400,public fieldErrors?:Record<string,string[]>){super(message)}}
+export function resultError(error:unknown):{body:ActionResult;status:number}{if(error instanceof AppError)return{body:{ok:false,code:error.code,message:error.message,fieldErrors:error.fieldErrors},status:error.status};if(error instanceof ZodError){const fields:Record<string,string[]>={};for(const issue of error.issues){const key=issue.path.join(".")||"form";(fields[key]??=[]).push(issue.message)}return{body:{ok:false,code:"VALIDATION_ERROR",message:"Periksa kembali data yang diisi.",fieldErrors:fields},status:422}}return{body:{ok:false,code:"INTERNAL_ERROR",message:"Terjadi kesalahan server. Silakan coba kembali."},status:500}}
+export function success<T>(data:T):ActionResult<T>{return{ok:true,data}}

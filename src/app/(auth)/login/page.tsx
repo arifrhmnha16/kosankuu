@@ -1,0 +1,1 @@
+import{AuthPage}from"@/components/auth-page";export const metadata={title:"Login",robots:{index:false,follow:false}};export default function Page(){return <AuthPage mode="login" title="Login" description="Masuk dengan email dan password Anda."/>}

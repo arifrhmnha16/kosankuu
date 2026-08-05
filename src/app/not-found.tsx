@@ -1,0 +1,1 @@
+import Link from"next/link";export default function NotFound(){return <main className="section"><div className="container empty"><h1>Halaman tidak ditemukan</h1><p className="muted">Alamat yang Anda buka tidak tersedia.</p><Link className="button dark" href="/">Kembali ke beranda</Link></div></main>}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Katalog kamar Manzsa Residence.">
+    <title>Katalog Kamar - Manzsa Residence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: {
+                fontFamily: { sans: ['Montserrat', 'sans-serif'], heading: ['Cormorant Garamond', 'serif'] },
+                colors: { primary: '#C6F564', secondary: '#1DA1F2', surface: '#F3F4F6', dark: '#111827' },
+                letterSpacing: { tightest: '-.02em', widest: '.05em' }
+            }}
+        }
+    </script>
+    <style>
+        input[type="range"] { accent-color: #1DA1F2; }
+    </style>
+    <link rel="stylesheet" href="compact-tailwind.css">
+</head>
+<body class="pt-[84px] bg-surface text-gray-900 antialiased font-sans selection:bg-primary selection:text-black overflow-x-hidden">
+
+    <header class="bg-gradient-to-br from-[#1DA1F2] to-[#1269A4] text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:48px_48px]"></div>
+        <nav class="fixed z-50 top-0 left-0 right-0 h-[84px] bg-gradient-to-br from-[#1DA1F2] to-[#1269A4] flex items-center justify-between" style="padding-left:max(1.25rem,calc((100vw - 1024px)/2 + 1.25rem));padding-right:max(1.25rem,calc((100vw - 1024px)/2 + 1.25rem))">
+                <a href="aeline_landing_page.html" class="flex items-center gap-2 text-xl sm:text-2xl font-semibold tracking-tightest">
+                <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+                Manzsa Residence
+            </a>
+                <div class="hidden xl:flex items-center gap-6 text-xs font-semibold tracking-widest uppercase">
+                    <a href="aeline_landing_page.html#beranda" class="hover:text-primary">Beranda</a><a href="aeline_landing_page.html#tentang" class="hover:text-primary">Tentang</a><a href="aeline_landing_page.html#kamar" class="text-primary">Kamar</a><a href="aeline_landing_page.html#fasilitas" class="hover:text-primary">Fasilitas</a><a href="aeline_landing_page.html#galeri" class="hover:text-primary">Galeri</a><a href="aeline_landing_page.html#faq" class="hover:text-primary">FAQ</a><a href="aeline_landing_page.html#kontak" class="hover:text-primary">Kontak</a>
+            </div>
+            <div class="hidden xl:flex items-center gap-3">
+                <a href="login.html" class="text-xs font-bold tracking-widest uppercase px-3 py-3">Login</a>
+                <a href="registrasi.html" class="bg-primary text-black text-xs font-bold tracking-widest uppercase px-6 py-3 rounded-full">Daftar</a>
+            </div>
+            <button type="button" data-menu-toggle class="xl:hidden p-2" aria-expanded="false" aria-controls="mobile-menu" aria-label="Buka menu">
+                <svg data-menu-open width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <svg data-menu-close class="hidden" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 6 12 12M18 6 6 18"/></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" data-mobile-menu class="hidden fixed z-40 top-[84px] left-0 right-0 xl:hidden mx-5 bg-white text-dark rounded-2xl p-5 shadow-xl">
+            <div class="grid gap-4 text-sm font-semibold"><a href="aeline_landing_page.html#beranda">Beranda</a><a href="aeline_landing_page.html#tentang">Tentang</a><a href="aeline_landing_page.html#kamar">Kamar</a><a href="aeline_landing_page.html#fasilitas">Fasilitas</a><a href="aeline_landing_page.html#galeri">Galeri</a><a href="aeline_landing_page.html#faq">FAQ</a><a href="aeline_landing_page.html#kontak">Kontak</a><div class="flex gap-3 pt-3 border-t"><a href="login.html">Login</a><a href="registrasi.html">Daftar</a></div></div>
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 pt-12 pb-20 text-center">
+            <p class="text-xs font-bold tracking-[.16em] uppercase text-primary mb-4">Katalog kamar</p>
+            <h1 class="text-4xl md:text-6xl font-semibold tracking-tightest mb-5">Temukan kamar yang pas.</h1>
+            <p class="text-white/80 max-w-2xl mx-auto mb-9">Cari berdasarkan nama atau nomor kamar, lalu sesuaikan status, harga, tipe sewa, dan fasilitas.</p>
+            <div class="relative max-w-3xl mx-auto text-dark">
+                <svg class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input data-search type="search" placeholder="Cari nama atau nomor kamar..." class="w-full bg-white rounded-full pl-14 pr-6 py-5 outline-none focus:ring-4 focus:ring-primary/40 shadow-2xl" aria-label="Cari kamar">
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-5 sm:px-6 py-10 md:py-14">
+        <div class="grid lg:grid-cols-[290px_1fr] gap-7 items-start">
+            <aside class="bg-white rounded-3xl p-6 lg:sticky lg:top-6 shadow-sm" aria-label="Filter kamar">
+                <div class="flex items-center justify-between mb-7"><h2 class="font-semibold text-lg">Filter</h2><button type="button" data-reset class="text-xs font-semibold text-secondary">Reset</button></div>
+
+                <fieldset class="pb-6 border-b"><legend class="font-semibold text-sm mb-4">Status kamar</legend><div class="space-y-3 text-sm">
+                    <label class="flex gap-3"><input type="checkbox" name="status" value="available" class="accent-secondary"> Tersedia</label>
+                    <label class="flex gap-3"><input type="checkbox" name="status" value="soon" class="accent-secondary"> Segera tersedia</label>
+                    <label class="flex gap-3"><input type="checkbox" name="status" value="occupied" class="accent-secondary"> Terisi</label>
+                </div></fieldset>
+
+                <fieldset class="py-6 border-b"><legend class="font-semibold text-sm mb-4">Harga maksimal</legend><input data-price type="range" min="500000" max="4000000" step="100000" value="4000000" class="w-full"><div class="flex justify-between text-xs text-gray-500 mt-2"><span>Rp500 rb</span><strong data-price-label class="text-dark">Rp4 jt</strong></div></fieldset>
+
+                <fieldset class="py-6 border-b"><legend class="font-semibold text-sm mb-4">Tipe sewa</legend><div class="space-y-3 text-sm">
+                    <label class="flex gap-3"><input type="checkbox" name="rentType" value="jam" class="accent-secondary"> Per jam</label>
+                    <label class="flex gap-3"><input type="checkbox" name="rentType" value="hari" class="accent-secondary"> Per hari</label>
+                    <label class="flex gap-3"><input type="checkbox" name="rentType" value="bulan" class="accent-secondary"> Per bulan</label>
+                </div></fieldset>
+
+                <fieldset class="pt-6"><legend class="font-semibold text-sm mb-4">Fasilitas</legend><div class="space-y-3 text-sm">
+                    <label class="flex gap-3"><input type="checkbox" name="facility" value="ac" class="accent-secondary"> AC</label>
+                    <label class="flex gap-3"><input type="checkbox" name="facility" value="wifi" class="accent-secondary"> Wi-Fi</label>
+                    <label class="flex gap-3"><input type="checkbox" name="facility" value="kamar mandi dalam" class="accent-secondary"> Kamar mandi dalam</label>
+                    <label class="flex gap-3"><input type="checkbox" name="facility" value="meja kerja" class="accent-secondary"> Meja kerja</label>
+                </div></fieldset>
+            </aside>
+
+            <section aria-labelledby="catalog-heading">
+                <div class="bg-white rounded-2xl p-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+                    <p id="catalog-heading" data-result-count class="text-sm text-gray-600">Menampilkan kamar</p>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <label class="text-xs text-gray-500" for="sort">Urutkan</label>
+                        <select id="sort" data-sort class="border rounded-full px-4 py-2.5 text-sm bg-white outline-none">
+                            <option value="available">Ketersediaan</option><option value="low">Harga termurah</option><option value="high">Harga termahal</option>
+                        </select>
+                        <div class="flex rounded-full border p-1" aria-label="Tampilan daftar">
+                            <button type="button" data-view="grid" class="p-2 rounded-full bg-dark text-white" aria-label="Tampilan grid" aria-pressed="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></button>
+                            <button type="button" data-view="list" class="p-2 rounded-full" aria-label="Tampilan list" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></button>
+                        </div>
+                        <button type="button" data-error-demo class="text-xs text-red-600 font-semibold">Simulasi error</button>
+                    </div>
+                </div>
+
+                <div data-loading class="hidden bg-white rounded-3xl py-20 text-center"><div class="w-10 h-10 mx-auto rounded-full border-4 border-gray-200 border-t-secondary animate-spin mb-4"></div><p class="font-semibold">Memuat kamar...</p><p class="text-sm text-gray-500 mt-1">Menyesuaikan hasil pencarian dan filter.</p></div>
+                <div data-error class="hidden bg-white rounded-3xl py-20 px-5 text-center"><div class="w-14 h-14 mx-auto rounded-full bg-red-50 text-red-600 grid place-items-center text-2xl mb-5">!</div><h3 class="text-xl font-semibold mb-2">Data kamar gagal dimuat</h3><p class="text-gray-500 mb-6">Terjadi kendala saat mengambil daftar kamar.</p><button type="button" data-retry class="px-6 py-3 rounded-full bg-dark text-white font-semibold">Coba Lagi</button></div>
+                <div data-empty class="hidden bg-white rounded-3xl py-20 px-5 text-center"><div class="w-14 h-14 mx-auto rounded-full bg-surface grid place-items-center text-2xl mb-5">⌕</div><h3 class="text-xl font-semibold mb-2">Kamar tidak ditemukan</h3><p class="text-gray-500 mb-6">Coba ubah kata pencarian atau pilihan filter Anda.</p><button type="button" data-reset class="px-6 py-3 rounded-full bg-dark text-white font-semibold">Reset Filter</button></div>
+                <div data-room-grid class="grid md:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+                <div class="text-center mt-9"><button type="button" data-load-more class="px-7 py-3.5 rounded-full bg-dark text-white font-semibold hover:bg-secondary">Muat Lebih Banyak</button></div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white mt-12 px-5 sm:px-6 py-10"><div class="max-w-7xl mx-auto flex flex-col sm:flex-row gap-5 justify-between"><div><p class="font-semibold text-lg">Manzsa Residence</p><p class="text-sm text-gray-400 mt-2">Hunian nyaman dengan proses sewa yang jelas.</p></div><div class="text-sm text-gray-400"><p>+62 812-3456-7890</p><p>halo@manzsaresidence.id</p></div></div></footer>
+
+    <script>
+        (() => {
+            const rooms = [
+                {id:'101',name:'Kamar Standard 101',type:'Standard',price:1350000,unit:'bulan',status:'available',facilities:['wifi','meja kerja'],image:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=900&auto=format&fit=crop'},
+                {id:'102',name:'Kamar Standard 102',type:'Standard',price:1400000,unit:'bulan',status:'occupied',facilities:['wifi','ac'],image:'https://images.unsplash.com/photo-1505693314120-0d443867891c?q=80&w=900&auto=format&fit=crop'},
+                {id:'201',name:'Kamar Deluxe 201',type:'Deluxe',price:1850000,unit:'bulan',status:'available',facilities:['wifi','ac','kamar mandi dalam','meja kerja'],image:'https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=900&auto=format&fit=crop'},
+                {id:'202',name:'Kamar Deluxe 202',type:'Deluxe',price:1900000,unit:'bulan',status:'soon',facilities:['wifi','ac','kamar mandi dalam'],image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=900&auto=format&fit=crop'},
+                {id:'301',name:'Kamar Premium 301',type:'Premium',price:2250000,unit:'bulan',status:'available',facilities:['wifi','ac','kamar mandi dalam','meja kerja'],image:'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?q=80&w=900&auto=format&fit=crop'},
+                {id:'302',name:'Kamar Premium 302',type:'Premium',price:2350000,unit:'bulan',status:'occupied',facilities:['wifi','ac','kamar mandi dalam'],image:'https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=900&auto=format&fit=crop'},
+                {id:'H01',name:'Transit Room H01',type:'Transit',price:85000,unit:'jam',status:'available',facilities:['wifi','ac'],image:'https://images.unsplash.com/photo-1560185008-b033106af5c3?q=80&w=900&auto=format&fit=crop'},
+                {id:'D01',name:'Daily Room D01',type:'Harian',price:275000,unit:'hari',status:'available',facilities:['wifi','ac','kamar mandi dalam'],image:'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=900&auto=format&fit=crop'},
+                {id:'D02',name:'Daily Room D02',type:'Harian',price:325000,unit:'hari',status:'soon',facilities:['wifi','ac','meja kerja'],image:'https://images.unsplash.com/photo-1615874694520-474822394e73?q=80&w=900&auto=format&fit=crop'},
+                {id:'401',name:'Studio Eksklusif 401',type:'Studio',price:3200000,unit:'bulan',status:'available',facilities:['wifi','ac','kamar mandi dalam','meja kerja'],image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=900&auto=format&fit=crop'}
+            ];
+            const labels={available:['Tersedia','bg-green-100 text-green-700'],soon:['Segera tersedia','bg-amber-100 text-amber-700'],occupied:['Terisi','bg-gray-200 text-gray-600']};
+            const state={view:'grid',visible:6,error:false,timer:null};
+            const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+            const grid=$('[data-room-grid]'),loading=$('[data-loading]'),empty=$('[data-empty]'),error=$('[data-error]'),more=$('[data-load-more]');
+            const money=n=>new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n);
+            const checked=name=>$$(`input[name="${name}"]:checked`).map(el=>el.value);
+
+            function filteredRooms(){
+                const query=$('[data-search]').value.trim().toLowerCase(), statuses=checked('status'), types=checked('rentType'), facilities=checked('facility'), max=Number($('[data-price]').value);
+                let data=rooms.filter(room=>(!query||room.name.toLowerCase().includes(query)||room.id.toLowerCase().includes(query))&&room.price<=max&&(!statuses.length||statuses.includes(room.status))&&(!types.length||types.includes(room.unit))&&facilities.every(f=>room.facilities.includes(f)));
+                const sort=$('[data-sort]').value;
+                if(sort==='low')data.sort((a,b)=>a.price-b.price); if(sort==='high')data.sort((a,b)=>b.price-a.price); if(sort==='available')data.sort((a,b)=>({available:0,soon:1,occupied:2}[a.status]-{available:0,soon:1,occupied:2}[b.status]));
+                return data;
+            }
+            function card(room){
+                const [label,classes]=labels[room.status], list=state.view==='list';
+                const dot=room.status==='available'?'bg-green-500':room.status==='soon'?'bg-amber-500':'bg-gray-400';
+                return `<a href="detail_kamar.html?id=${encodeURIComponent(room.id)}" class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow ${list?'md:flex md:col-span-full':''}"><img src="${room.image}" alt="${room.name}" class="object-cover ${list?'w-full md:w-64 h-56 md:h-auto':'w-full h-52'}"><div class="p-5 flex-1"><div class="flex items-start justify-between gap-3 mb-3"><div><p class="text-xs text-gray-500 mb-1">No. ${room.id} · ${room.type}</p><h3 class="font-semibold text-lg group-hover:text-secondary">${room.name}</h3></div><span class="shrink-0 inline-flex items-center gap-2 text-[11px] font-semibold text-gray-600"><i class="w-2 h-2 rounded-full ${dot}"></i>${label}</span></div><p class="text-lg font-bold">${money(room.price)} <span class="text-xs font-normal text-gray-500">/${room.unit}</span></p><p class="text-xs text-gray-500 mt-4">${room.facilities.join(' · ')}</p></div></a>`;
+            }
+            function render(){
+                const data=filteredRooms(); grid.className=state.view==='grid'?'grid md:grid-cols-2 xl:grid-cols-3 gap-5':'grid grid-cols-1 gap-4';
+                grid.innerHTML=data.slice(0,state.visible).map(card).join('');
+                $('[data-result-count]').textContent=`Menampilkan ${Math.min(state.visible,data.length)} dari ${data.length} kamar`;
+                empty.classList.toggle('hidden',data.length>0); grid.classList.toggle('hidden',data.length===0); more.classList.toggle('hidden',data.length<=state.visible||data.length===0);
+            }
+            function process(){
+                clearTimeout(state.timer); grid.classList.add('hidden'); empty.classList.add('hidden'); more.classList.add('hidden'); error.classList.add('hidden'); loading.classList.remove('hidden');
+                state.timer=setTimeout(()=>{loading.classList.add('hidden');state.visible=6;render();},350);
+            }
+            function reset(){
+                $('[data-search]').value=''; $$('aside input[type="checkbox"]').forEach(i=>i.checked=false); $('[data-price]').value=4000000; $('[data-price-label]').textContent='Rp4 jt'; $('[data-sort]').value='available'; state.error=false; process();
+            }
+            $('[data-search]').addEventListener('input',process); $('[data-sort]').addEventListener('change',process);
+            $$('aside input').forEach(input=>input.addEventListener('change',()=>{if(input.matches('[data-price]'))$('[data-price-label]').textContent=money(Number(input.value));process();}));
+            $$('[data-reset]').forEach(button=>button.addEventListener('click',reset));
+            $$('[data-view]').forEach(button=>button.addEventListener('click',()=>{state.view=button.dataset.view;$$('[data-view]').forEach(b=>{const active=b===button;b.classList.toggle('bg-dark',active);b.classList.toggle('text-white',active);b.setAttribute('aria-pressed',String(active));});render();}));
+            more.addEventListener('click',()=>{state.visible+=3;render();});
+            $('[data-error-demo]').addEventListener('click',()=>{clearTimeout(state.timer);loading.classList.add('hidden');grid.classList.add('hidden');empty.classList.add('hidden');more.classList.add('hidden');error.classList.remove('hidden');});
+            $('[data-retry]').addEventListener('click',process);
+            const menu=$('[data-mobile-menu]'),toggle=$('[data-menu-toggle]');toggle.addEventListener('click',()=>{const open=menu.classList.contains('hidden');menu.classList.toggle('hidden',!open);$('[data-menu-open]').classList.toggle('hidden',open);$('[data-menu-close]').classList.toggle('hidden',!open);toggle.setAttribute('aria-expanded',String(open));});menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>menu.classList.add('hidden')));
+            render();
+        })();
+    </script>
+</body>
+</html>

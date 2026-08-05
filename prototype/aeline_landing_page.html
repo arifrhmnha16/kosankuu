@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manzsa Residence, hunian nyaman dengan proses booking yang jelas dan mudah.">
+    <title>Manzsa Residence - Hunian Nyaman dan Modern</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Montserrat', 'sans-serif'], heading: ['Cormorant Garamond', 'serif'] },
+                    colors: {
+                        primary: '#C6F564', secondary: '#1DA1F2',
+                        surface: '#F3F4F6', dark: '#111827', body: '#6B7280'
+                    },
+                    letterSpacing: { tightest: '-.02em', widest: '.05em' }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-padding-top: 84px; }
+        @media (min-width: 768px) {
+            #tentang, #kamar, #fasilitas, #galeri, #faq { padding-top: 88px !important; padding-bottom: 88px !important; }
+        }
+        /* Skala desktop seperti browser zoom 80% tanpa memperlebar kanvas. */
+        dialog::backdrop { background: rgba(17, 24, 39, .82); }
+        summary::-webkit-details-marker { display: none; }
+    </style>
+    <link rel="stylesheet" href="compact-tailwind.css">
+</head>
+<body class="landing-page bg-white text-gray-900 antialiased font-sans selection:bg-primary selection:text-black overflow-x-hidden">
+
+    <!-- HEADER + HERO -->
+    <section id="beranda" class="relative pt-[84px] min-h-screen bg-gradient-to-br from-[#1DA1F2] to-[#1269A4] rounded-b-[2rem] md:rounded-b-[2.5rem] overflow-hidden text-white">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:64px_64px]"></div>
+            <div class="absolute -top-32 -left-32 w-96 h-96 bg-cyan-300/40 rounded-full blur-[100px]"></div>
+            <div class="absolute top-1/3 -right-24 w-80 h-80 bg-primary/25 rounded-full blur-[100px]"></div>
+        </div>
+
+        <header class="fixed z-50 top-0 left-0 right-0 bg-transparent transition-colors duration-200" data-public-header>
+            <nav class="w-full max-w-7xl mx-auto h-[84px] px-5 sm:px-6 flex items-center justify-between">
+                <a href="aeline_landing_page.html" class="flex items-center gap-2 text-xl sm:text-2xl font-semibold tracking-tightest" aria-label="Manzsa Residence">
+                    <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+                    <span data-property-name>Manzsa Residence</span>
+                </a>
+
+                <div class="hidden xl:flex items-center gap-6 text-xs font-semibold tracking-widest uppercase">
+                    <a href="#beranda" class="hover:text-primary">Beranda</a>
+                    <a href="#tentang" class="hover:text-primary">Tentang</a>
+                    <a href="#kamar" class="hover:text-primary">Kamar</a>
+                    <a href="#fasilitas" class="hover:text-primary">Fasilitas</a>
+                    <a href="#galeri" class="hover:text-primary">Galeri</a>
+                    <a href="#faq" class="hover:text-primary">FAQ</a>
+                    <a href="#kontak" class="hover:text-primary">Kontak</a>
+                </div>
+
+                <div class="hidden xl:flex items-center gap-3" data-auth-actions aria-busy="true">
+                    <span class="text-xs font-semibold tracking-widest uppercase">Memuat...</span>
+                </div>
+
+                <button type="button" class="xl:hidden p-2" data-menu-toggle aria-expanded="false" aria-controls="mobile-navigation" aria-label="Buka menu navigasi">
+                    <svg data-menu-open-icon width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <svg data-menu-close-icon class="hidden" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                </button>
+            </nav>
+
+            <div id="mobile-navigation" class="hidden xl:hidden mx-5 mb-4 p-5 rounded-2xl bg-white text-dark shadow-2xl" data-mobile-menu>
+                <div class="grid gap-4 text-sm font-semibold">
+                    <a href="#beranda">Beranda</a><a href="#tentang">Tentang</a><a href="#kamar">Kamar</a>
+                    <a href="#fasilitas">Fasilitas</a><a href="#galeri">Galeri</a><a href="#faq">FAQ</a><a href="#kontak">Kontak</a>
+                    <div class="flex items-center gap-3 pt-3 border-t" data-auth-actions aria-busy="true"><span>Memuat...</span></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="relative z-10 flex flex-col items-center text-center px-5 mt-8 md:mt-12 max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-semibold tracking-tightest leading-[1.1] md:leading-[1.05] mb-5">Nyaman untuk tinggal.<br>Jelas sejak booking.</h1>
+            <p class="text-sm sm:text-base md:text-lg text-white/90 leading-relaxed max-w-xl mb-8">Kamar siap huni dengan fasilitas lengkap, proses booking yang transparan, dan pengelolaan kebutuhan penghuni dalam satu sistem.</p>
+            <div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                <a href="katalog_kamar.html" class="w-full sm:w-auto px-8 py-3.5 rounded-full border border-white/30 font-semibold hover:bg-white/10 transition-colors">Lihat Kamar</a>
+                <a href="login.html?next=katalog_kamar.html" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-primary text-black font-semibold hover:bg-white transition-colors">Booking Sekarang</a>
+            </div>
+        </div>
+
+        <!-- Komposisi tiga foto asli dipertahankan -->
+        <div class="relative z-10 w-full max-w-sm sm:max-w-2xl md:max-w-5xl mx-auto mt-12 sm:mt-16 md:mt-20 flex flex-col items-center h-[200px] sm:h-[260px] md:h-[350px]">
+            <div class="relative w-[95%] sm:w-full h-[140px] sm:h-[180px] md:h-[220px] flex justify-center items-center">
+                <div role="img" aria-label="Kamar Manzsa Residence" class="absolute z-10 left-0 md:left-[10%] w-[110px] sm:w-[160px] md:w-[240px] h-[80px] sm:h-[120px] md:h-[160px] bg-white rounded-[12px] sm:rounded-[16px] md:rounded-[20px] shadow-2xl -rotate-[6deg] hover:rotate-0 hover:scale-105 hover:z-40 transition-all duration-300 bg-[url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=600&auto=format&fit=crop')] bg-cover bg-center border-[2px] sm:border-[3px] md:border-4 border-white"></div>
+                <div role="img" aria-label="Kamar unggulan Manzsa Residence" class="absolute z-30 left-1/2 -translate-x-1/2 -top-2 md:-top-4 w-[140px] sm:w-[220px] md:w-[360px] h-[100px] sm:h-[150px] md:h-[220px] bg-white rounded-[16px] md:rounded-[24px] shadow-2xl hover:-translate-y-2 hover:scale-105 transition-all duration-300 bg-[url('https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center border-[3px] md:border-[6px] border-white"></div>
+                <div role="img" aria-label="Kamar Manzsa Residence" class="absolute z-20 right-0 md:right-[10%] w-[120px] sm:w-[170px] md:w-[250px] h-[85px] sm:h-[130px] md:h-[170px] bg-white rounded-[12px] sm:rounded-[16px] md:rounded-[24px] shadow-2xl rotate-[6deg] hover:rotate-0 hover:scale-105 hover:z-40 transition-all duration-300 bg-[url('https://images.unsplash.com/photo-1505693314120-0d443867891c?q=80&w=600&auto=format&fit=crop')] bg-cover bg-center border-[2px] sm:border-[3px] md:border-4 border-white"></div>
+            </div>
+            <p class="absolute bottom-5 text-xs sm:text-sm font-medium tracking-wide text-white/90">Pilih kamar yang paling sesuai dengan kebutuhan Anda</p>
+        </div>
+    </section>
+
+    <!-- MANFAAT -->
+    <section id="tentang" class="scroll-mt-24 py-20 md:py-28 px-5 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-3xl mb-12">
+                <p class="text-xs font-bold tracking-[.15em] uppercase mb-4">Kenapa Manzsa Residence</p>
+                <h2 class="text-3xl md:text-5xl font-semibold tracking-tightest">Semua proses penting dibuat lebih jelas.</h2>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <article class="rounded-3xl bg-surface p-6"><div class="w-11 h-11 bg-secondary text-white rounded-xl grid place-items-center mb-7">✓</div><h3 class="font-semibold mb-2">Status kamar jelas</h3><p class="text-sm text-gray-600 leading-relaxed">Lihat ketersediaan kamar sebelum mengajukan booking.</p></article>
+                <article class="rounded-3xl bg-surface p-6"><div class="w-11 h-11 bg-dark text-white rounded-xl grid place-items-center mb-7">⌕</div><h3 class="font-semibold mb-2">Booking diperiksa</h3><p class="text-sm text-gray-600 leading-relaxed">Setiap permintaan diverifikasi untuk mencegah jadwal bentrok.</p></article>
+                <article class="rounded-3xl bg-primary p-6"><div class="w-11 h-11 bg-white rounded-xl grid place-items-center mb-7">↗</div><h3 class="font-semibold mb-2">Pembayaran fleksibel</h3><p class="text-sm text-gray-800 leading-relaxed">Bayar online atau unggah bukti transfer manual.</p></article>
+                <article class="rounded-3xl bg-surface p-6"><div class="w-11 h-11 bg-secondary text-white rounded-xl grid place-items-center mb-7">▤</div><h3 class="font-semibold mb-2">Invoice otomatis</h3><p class="text-sm text-gray-600 leading-relaxed">Riwayat tagihan dan invoice tersimpan dengan rapi.</p></article>
+                <article class="rounded-3xl bg-dark text-white p-6"><div class="w-11 h-11 bg-white/10 rounded-xl grid place-items-center mb-7">!</div><h3 class="font-semibold mb-2">Keluhan tercatat</h3><p class="text-sm text-gray-400 leading-relaxed">Laporan penghuni terdokumentasi hingga selesai.</p></article>
+            </div>
+            <div class="text-center mt-10"><a href="tentang.html" class="inline-block rounded-full border border-gray-300 px-7 py-3.5 font-semibold hover:bg-dark hover:text-white">Selengkapnya Tentang Kami</a></div>
+        </div>
+    </section>
+
+    <!-- KAMAR -->
+    <section id="kamar" class="scroll-mt-24 py-20 md:py-28 bg-surface px-5 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-12">
+                <div><p class="text-xs font-bold tracking-[.15em] uppercase mb-4">Pilihan kamar</p><h2 class="text-3xl md:text-5xl font-semibold tracking-tightest">Kamar yang tersedia</h2></div>
+                <div class="flex gap-3"><button type="button" data-room-state="normal" class="px-4 py-2 rounded-full bg-dark text-white text-xs font-semibold">Data normal</button><button type="button" data-room-state="empty" class="px-4 py-2 rounded-full bg-white border text-xs font-semibold">Lihat empty state</button></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-room-list>
+                <article class="bg-white rounded-3xl overflow-hidden"><img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=900&auto=format&fit=crop" alt="Kamar Standard 101" class="w-full h-60 object-cover"><div class="p-6"><div class="flex justify-between gap-4 mb-4"><div><p class="text-xs text-gray-500 mb-1">Lantai 1 · No. 101</p><h3 class="text-xl font-semibold">Kamar Standard</h3></div><span class="h-fit text-xs font-semibold text-green-700">● Tersedia</span></div><p class="font-bold text-xl mb-5">Rp1.350.000 <span class="text-sm font-normal text-gray-500">/bulan</span></p><a href="detail_kamar.html?id=101" class="block text-center rounded-full border border-gray-300 px-5 py-3 font-semibold hover:bg-dark hover:text-white">Lihat Detail</a></div></article>
+                <article class="bg-white rounded-3xl overflow-hidden"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=900&auto=format&fit=crop" alt="Kamar Deluxe 201" class="w-full h-60 object-cover"><div class="p-6"><div class="flex justify-between gap-4 mb-4"><div><p class="text-xs text-gray-500 mb-1">Lantai 2 · No. 201</p><h3 class="text-xl font-semibold">Kamar Deluxe</h3></div><span class="h-fit text-xs font-semibold text-green-700">● Tersedia</span></div><p class="font-bold text-xl mb-5">Rp1.850.000 <span class="text-sm font-normal text-gray-500">/bulan</span></p><a href="detail_kamar.html?id=201" class="block text-center rounded-full bg-primary px-5 py-3 font-semibold hover:bg-dark hover:text-white">Lihat Detail</a></div></article>
+                <article class="bg-white rounded-3xl overflow-hidden"><img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?q=80&w=900&auto=format&fit=crop" alt="Kamar Premium 302" class="w-full h-60 object-cover"><div class="p-6"><div class="flex justify-between gap-4 mb-4"><div><p class="text-xs text-gray-500 mb-1">Lantai 3 · No. 302</p><h3 class="text-xl font-semibold">Kamar Premium</h3></div><span class="h-fit text-xs font-semibold text-amber-700">● Maintenance</span></div><p class="font-bold text-xl mb-5">Rp2.150.000 <span class="text-sm font-normal text-gray-500">/bulan</span></p><a href="detail_kamar.html?id=302" class="block text-center rounded-full border border-gray-300 px-5 py-3 font-semibold hover:bg-dark hover:text-white">Lihat Detail</a></div></article>
+            </div>
+
+            <div class="hidden rounded-3xl bg-white border border-dashed border-gray-300 py-16 px-5 text-center" data-room-empty>
+                <div class="w-14 h-14 mx-auto mb-5 bg-surface rounded-full grid place-items-center text-2xl">⌂</div><h3 class="text-xl font-semibold mb-2">Kamar belum tersedia saat ini</h3><p class="text-gray-500 mb-6">Silakan kembali lagi atau hubungi pengelola untuk informasi berikutnya.</p><a href="kontak.html" class="inline-block rounded-full bg-dark text-white px-6 py-3 font-semibold">Hubungi Pengelola</a>
+            </div>
+            <div class="text-center mt-10"><a href="katalog_kamar.html" class="inline-block rounded-full bg-dark text-white px-7 py-3.5 font-semibold hover:bg-secondary">Lihat Semua Kamar</a></div>
+        </div>
+    </section>
+
+    <!-- FASILITAS -->
+    <section id="fasilitas" class="scroll-mt-24 py-20 md:py-28 px-5 sm:px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-[.8fr_1.2fr] gap-12 items-start">
+            <div class="lg:sticky lg:top-10"><p class="text-xs font-bold tracking-[.15em] uppercase mb-4">Fasilitas properti</p><h2 class="text-3xl md:text-5xl font-semibold tracking-tightest mb-5">Kebutuhan harian sudah disiapkan.</h2><p class="text-gray-600 leading-relaxed">Fasilitas dapat berbeda menurut tipe kamar. Detail lengkap tersedia pada halaman setiap kamar.</p></div>
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div class="p-6 rounded-3xl bg-secondary text-white min-h-40"><span class="text-3xl">⌁</span><h3 class="font-semibold text-xl mt-9">Wi-Fi berkecepatan tinggi</h3></div>
+                <div class="p-6 rounded-3xl bg-surface min-h-40"><span class="text-3xl">❄</span><h3 class="font-semibold text-xl mt-9">AC di setiap kamar</h3></div>
+                <div class="p-6 rounded-3xl bg-surface min-h-40"><span class="text-3xl">▣</span><h3 class="font-semibold text-xl mt-9">Dapur bersama</h3></div>
+                <div class="p-6 rounded-3xl bg-primary min-h-40"><span class="text-3xl">◉</span><h3 class="font-semibold text-xl mt-9">CCTV & akses 24 jam</h3></div>
+                <div class="p-6 rounded-3xl bg-dark text-white min-h-40"><span class="text-3xl">▤</span><h3 class="font-semibold text-xl mt-9">Laundry area</h3></div>
+                <div class="p-6 rounded-3xl bg-surface min-h-40"><span class="text-3xl">P</span><h3 class="font-semibold text-xl mt-9">Area parkir</h3></div>
+            </div>
+            <a href="fasilitas.html" class="lg:col-start-2 inline-block w-fit rounded-full bg-dark text-white px-7 py-3.5 font-semibold">Lihat Semua Fasilitas</a>
+        </div>
+    </section>
+
+    <!-- GALERI -->
+    <section id="galeri" class="scroll-mt-24 py-20 md:py-28 bg-dark text-white px-5 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12"><p class="text-xs font-bold tracking-[.15em] uppercase mb-4 text-primary">Galeri</p><h2 class="text-3xl md:text-5xl font-semibold tracking-tightest">Lihat suasana Manzsa.</h2><p class="text-gray-400 mt-4">Klik foto untuk melihat tampilan lebih besar.</p></div>
+            <div class="grid grid-cols-2 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[230px] gap-4">
+                <button class="col-span-2 row-span-2 overflow-hidden rounded-3xl" data-gallery-image data-src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=90&w=1600&auto=format&fit=crop" data-alt="Interior kamar Manzsa Residence"><img class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1000&auto=format&fit=crop" alt="Interior kamar Manzsa Residence"></button>
+                <button class="overflow-hidden rounded-3xl" data-gallery-image data-src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?q=90&w=1600&auto=format&fit=crop" data-alt="Dapur bersama"><img class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?q=80&w=700&auto=format&fit=crop" alt="Dapur bersama"></button>
+                <button class="overflow-hidden rounded-3xl" data-gallery-image data-src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=90&w=1600&auto=format&fit=crop" data-alt="Area bersama"><img class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=700&auto=format&fit=crop" alt="Area bersama"></button>
+                <button class="col-span-2 overflow-hidden rounded-3xl" data-gallery-image data-src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=90&w=1600&auto=format&fit=crop" data-alt="Kamar deluxe"><img class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1000&auto=format&fit=crop" alt="Kamar deluxe"></button>
+            </div>
+            <div class="text-center mt-10"><a href="galeri.html" class="inline-block rounded-full bg-primary text-black px-7 py-3.5 font-semibold">Lihat Semua Galeri</a></div>
+        </div>
+    </section>
+
+    <!-- CARA BOOKING -->
+    <section class="py-20 md:py-28 px-5 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-2xl mb-12"><p class="text-xs font-bold tracking-[.15em] uppercase mb-4">Cara booking</p><h2 class="text-3xl md:text-5xl font-semibold tracking-tightest">Enam langkah sampai kamar terkonfirmasi.</h2></div>
+            <ol class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <li class="p-6 rounded-3xl bg-surface"><span class="text-xs font-bold text-secondary">01</span><h3 class="font-semibold text-lg mt-10 mb-2">Pilih kamar</h3><p class="text-sm text-gray-600">Bandingkan tipe, fasilitas, harga, dan status kamar.</p></li>
+                <li class="p-6 rounded-3xl bg-surface"><span class="text-xs font-bold text-secondary">02</span><h3 class="font-semibold text-lg mt-10 mb-2">Pilih jadwal</h3><p class="text-sm text-gray-600">Tentukan tanggal mulai tinggal dan durasi sewa.</p></li>
+                <li class="p-6 rounded-3xl bg-primary"><span class="text-xs font-bold">03</span><h3 class="font-semibold text-lg mt-10 mb-2">Lihat ringkasan harga</h3><p class="text-sm text-gray-800">Periksa biaya sebelum mengirim permintaan.</p></li>
+                <li class="p-6 rounded-3xl bg-surface"><span class="text-xs font-bold text-secondary">04</span><h3 class="font-semibold text-lg mt-10 mb-2">Kirim booking</h3><p class="text-sm text-gray-600">Lengkapi data dan tunggu pemeriksaan pengelola.</p></li>
+                <li class="p-6 rounded-3xl bg-surface"><span class="text-xs font-bold text-secondary">05</span><h3 class="font-semibold text-lg mt-10 mb-2">Lakukan pembayaran</h3><p class="text-sm text-gray-600">Bayar online atau melalui transfer manual.</p></li>
+                <li class="p-6 rounded-3xl bg-dark text-white"><span class="text-xs font-bold text-primary">06</span><h3 class="font-semibold text-lg mt-10 mb-2">Booking terkonfirmasi</h3><p class="text-sm text-gray-400">Invoice dan detail hunian tersedia di akun Anda.</p></li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- LOKASI -->
+    <section class="py-20 md:py-28 bg-surface px-5 sm:px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-3 gap-6">
+            <div class="bg-secondary text-white rounded-3xl p-8"><p class="text-xs font-bold tracking-[.15em] uppercase mb-8">Lokasi</p><h2 class="text-3xl font-semibold mb-5">Mudah dijangkau dari pusat aktivitas.</h2><p class="text-white/80 leading-relaxed mb-8">Jl. Contoh Residence No. 21, Kecamatan Contoh, Kota Jakarta, Indonesia</p><a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="inline-flex px-5 py-3 rounded-full bg-white text-dark font-semibold">Buka Google Maps</a></div>
+            <div class="lg:col-span-2 min-h-[380px] rounded-3xl overflow-hidden relative bg-[#dce7d7]">
+                <div class="absolute inset-0 opacity-60 bg-[linear-gradient(35deg,transparent_45%,#fff_46%,#fff_49%,transparent_50%),linear-gradient(125deg,transparent_45%,#fff_46%,#fff_49%,transparent_50%)] bg-[size:90px_90px]"></div>
+                <div class="absolute inset-0 grid place-items-center"><div class="text-center"><div class="w-16 h-16 mx-auto rounded-full bg-secondary text-white grid place-items-center shadow-xl mb-3"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2"/></svg></div><p class="bg-white px-4 py-2 rounded-full font-semibold shadow">Manzsa Residence</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="scroll-mt-24 py-20 md:py-28 px-5 sm:px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12"><p class="text-xs font-bold tracking-[.15em] uppercase mb-4">FAQ</p><h2 class="text-3xl md:text-5xl font-semibold tracking-tightest">Pertanyaan yang sering ditanyakan.</h2></div>
+            <div class="space-y-3" data-faq-list>
+                <details class="group rounded-2xl bg-surface p-6"><summary class="cursor-pointer flex justify-between gap-5 font-semibold">Bagaimana cara melakukan booking?<span class="text-2xl leading-none group-open:rotate-45 transition-transform">+</span></summary><p class="pt-4 pr-10 text-gray-600 leading-relaxed">Pilih kamar, tentukan jadwal, periksa ringkasan harga, lalu kirim permintaan booking melalui akun Anda.</p></details>
+                <details class="group rounded-2xl bg-surface p-6"><summary class="cursor-pointer flex justify-between gap-5 font-semibold">Apakah booking langsung diterima?<span class="text-2xl leading-none group-open:rotate-45 transition-transform">+</span></summary><p class="pt-4 pr-10 text-gray-600 leading-relaxed">Permintaan akan diperiksa terlebih dahulu untuk memastikan kamar dan jadwal masih tersedia.</p></details>
+                <details class="group rounded-2xl bg-surface p-6"><summary class="cursor-pointer flex justify-between gap-5 font-semibold">Metode pembayaran apa yang tersedia?<span class="text-2xl leading-none group-open:rotate-45 transition-transform">+</span></summary><p class="pt-4 pr-10 text-gray-600 leading-relaxed">Prototype mendukung pembayaran online dan transfer manual dengan unggahan bukti pembayaran.</p></details>
+                <details class="group rounded-2xl bg-surface p-6"><summary class="cursor-pointer flex justify-between gap-5 font-semibold">Kapan booking dianggap terkonfirmasi?<span class="text-2xl leading-none group-open:rotate-45 transition-transform">+</span></summary><p class="pt-4 pr-10 text-gray-600 leading-relaxed">Booking terkonfirmasi setelah permintaan disetujui dan pembayaran berhasil diverifikasi.</p></details>
+                <details class="group rounded-2xl bg-surface p-6"><summary class="cursor-pointer flex justify-between gap-5 font-semibold">Apakah booking dapat dibatalkan?<span class="text-2xl leading-none group-open:rotate-45 transition-transform">+</span></summary><p class="pt-4 pr-10 text-gray-600 leading-relaxed">Pembatalan mengikuti kebijakan properti dan status booking. Hubungi pengelola sebelum melakukan pembatalan.</p></details>
+                <details class="group rounded-2xl bg-surface p-6"><summary class="cursor-pointer flex justify-between gap-5 font-semibold">Apakah saya menerima invoice?<span class="text-2xl leading-none group-open:rotate-45 transition-transform">+</span></summary><p class="pt-4 pr-10 text-gray-600 leading-relaxed">Ya. Invoice dibuat otomatis dan dapat dilihat dari dashboard setelah pembayaran tercatat.</p></details>
+            </div>
+            <div class="text-center mt-10"><a href="faq.html" class="inline-block rounded-full bg-dark text-white px-7 py-3.5 font-semibold">Lihat Semua FAQ</a></div>
+        </div>
+    </section>
+
+    <!-- KONTAK -->
+    <section id="kontak" class="scroll-mt-24 px-5 sm:px-6 pb-6">
+        <div class="max-w-7xl mx-auto bg-primary rounded-[2rem] px-6 py-12 md:p-16 grid lg:grid-cols-2 gap-10 items-center">
+            <div><p class="text-xs font-bold tracking-[.15em] uppercase mb-4">Kontak</p><h2 class="text-3xl md:text-5xl font-semibold tracking-tightest mb-5">Masih punya pertanyaan?</h2><p class="text-gray-800 max-w-lg">Tim pengelola siap membantu informasi kamar, jadwal survei, dan proses booking.</p></div>
+            <div class="grid sm:grid-cols-2 gap-4">
+                <a href="https://wa.me/6281234567890" class="bg-white rounded-2xl p-5"><p class="text-xs text-gray-500 mb-2">WhatsApp</p><p class="font-semibold">+62 812-3456-7890</p></a>
+                <a href="mailto:halo@manzsaresidence.id" class="bg-white rounded-2xl p-5"><p class="text-xs text-gray-500 mb-2">Email</p><p class="font-semibold break-all">halo@manzsaresidence.id</p></a>
+                <div class="sm:col-span-2 bg-dark text-white rounded-2xl p-5"><p class="text-xs text-gray-400 mb-2">Jam operasional</p><p class="font-semibold">Senin–Sabtu, 08.00–18.00 WIB</p></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white mt-14 px-5 sm:px-6 py-14">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
+            <div><div class="flex items-center gap-2 text-xl font-semibold mb-4"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Manzsa Residence</div><p class="text-sm text-gray-400 max-w-sm">Hunian nyaman dengan proses sewa yang lebih jelas dan praktis.</p></div>
+            <div><p class="font-semibold mb-4">Navigasi cepat</p><div class="grid grid-cols-2 gap-3 text-sm text-gray-400"><a href="#beranda">Beranda</a><a href="#tentang">Tentang</a><a href="#kamar">Kamar</a><a href="#fasilitas">Fasilitas</a><a href="#galeri">Galeri</a><a href="#faq">FAQ</a><a href="#kontak">Kontak</a></div></div>
+            <div><p class="font-semibold mb-4">Hubungi kami</p><div class="space-y-2 text-sm text-gray-400"><p>+62 812-3456-7890</p><p>halo@manzsaresidence.id</p><p>Senin–Sabtu, 08.00–18.00 WIB</p></div></div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-6 border-t border-white/10 text-xs text-gray-500">© 2026 Manzsa Residence. Prototype landing page.</div>
+    </footer>
+
+    <!-- GALERI PREVIEW -->
+    <dialog data-gallery-dialog class="w-[min(92vw,1100px)] p-0 bg-transparent rounded-3xl overflow-visible">
+        <div class="relative"><img data-gallery-preview src="" alt="" class="w-full max-h-[82vh] object-contain rounded-3xl bg-black"><button type="button" data-gallery-close class="absolute -top-3 -right-3 w-11 h-11 rounded-full bg-white text-dark text-xl shadow-xl" aria-label="Tutup preview">×</button><p data-gallery-caption class="absolute left-4 bottom-4 bg-black/65 text-white px-4 py-2 rounded-full text-sm"></p></div>
+    </dialog>
+
+    <script>
+        (() => {
+            const menuButton = document.querySelector('[data-menu-toggle]');
+            const mobileMenu = document.querySelector('[data-mobile-menu]');
+            const publicHeader = document.querySelector('[data-public-header]');
+            const openIcon = document.querySelector('[data-menu-open-icon]');
+            const closeIcon = document.querySelector('[data-menu-close-icon]');
+
+            const setMenu = (open) => {
+                mobileMenu?.classList.toggle('hidden', !open);
+                openIcon?.classList.toggle('hidden', open);
+                closeIcon?.classList.toggle('hidden', !open);
+                menuButton?.setAttribute('aria-expanded', String(open));
+                menuButton?.setAttribute('aria-label', open ? 'Tutup menu navigasi' : 'Buka menu navigasi');
+            };
+            menuButton?.addEventListener('click', () => setMenu(mobileMenu.classList.contains('hidden')));
+            mobileMenu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+
+            const updateHeaderBackground = () => {
+                const scrolled = window.scrollY > 12;
+                publicHeader.style.background = scrolled ? 'rgba(21, 120, 184, .96)' : 'transparent';
+                publicHeader.style.backdropFilter = scrolled ? 'blur(12px)' : 'none';
+            };
+            window.addEventListener('scroll', updateHeaderBackground, { passive: true });
+            updateHeaderBackground();
+
+            const scrollToSection = (hash, updateHistory = false) => {
+                const target = hash && document.querySelector(hash);
+                if (!target) return;
+                const headerHeight = document.querySelector('[data-public-header]')?.getBoundingClientRect().height || 64;
+                const top = target.getBoundingClientRect().top + window.scrollY - headerHeight + 1;
+                window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+                if (updateHistory) history.pushState(null, '', hash);
+            };
+            document.querySelectorAll('header a[href^="#"], footer a[href^="#"]').forEach(link => {
+                link.addEventListener('click', event => {
+                    event.preventDefault();
+                    setMenu(false);
+                    scrollToSection(link.getAttribute('href'), true);
+                });
+            });
+            if (location.hash) setTimeout(() => scrollToSection(location.hash), 80);
+
+            const initialData = window.__PUBLIC_HEADER_DATA__ || { propertyName: 'Manzsa Residence', session: null };
+            document.querySelectorAll('[data-property-name]').forEach(node => node.textContent = initialData.propertyName || 'Manzsa Residence');
+            const role = initialData.session?.user?.role || initialData.session?.user?.user_metadata?.role;
+            const dashboardHref = role === 'owner' ? '/owner' : role === 'tenant' ? '/tenant' : '/';
+            const authMarkup = initialData.session
+                ? `<a href="${dashboardHref}" class="bg-primary text-black text-xs font-bold tracking-widest uppercase px-6 py-3 rounded-full">Dashboard</a>`
+                : `<a href="login.html" class="text-xs font-bold tracking-widest uppercase px-3 py-3">Login</a><a href="registrasi.html" class="bg-primary text-black text-xs font-bold tracking-widest uppercase px-6 py-3 rounded-full">Daftar</a>`;
+            document.querySelectorAll('[data-auth-actions]').forEach(node => { node.innerHTML = authMarkup; node.setAttribute('aria-busy', 'false'); });
+
+            document.querySelectorAll('[data-faq-list] details').forEach(item => item.addEventListener('toggle', () => {
+                if (!item.open) return;
+                document.querySelectorAll('[data-faq-list] details').forEach(other => { if (other !== item) other.open = false; });
+            }));
+
+            const roomList = document.querySelector('[data-room-list]');
+            const roomEmpty = document.querySelector('[data-room-empty]');
+            document.querySelectorAll('[data-room-state]').forEach(button => button.addEventListener('click', () => {
+                const empty = button.dataset.roomState === 'empty';
+                roomList?.classList.toggle('hidden', empty);
+                roomEmpty?.classList.toggle('hidden', !empty);
+                document.querySelectorAll('[data-room-state]').forEach(item => {
+                    const active = item === button;
+                    item.classList.toggle('bg-dark', active); item.classList.toggle('text-white', active);
+                    item.classList.toggle('bg-white', !active); item.classList.toggle('border', !active);
+                });
+            }));
+
+            const dialog = document.querySelector('[data-gallery-dialog]');
+            const preview = document.querySelector('[data-gallery-preview]');
+            const caption = document.querySelector('[data-gallery-caption]');
+            document.querySelectorAll('[data-gallery-image]').forEach(button => button.addEventListener('click', () => {
+                preview.src = button.dataset.src; preview.alt = button.dataset.alt;
+                caption.textContent = button.dataset.alt; dialog.showModal();
+            }));
+            document.querySelector('[data-gallery-close]')?.addEventListener('click', () => dialog.close());
+            dialog?.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+        })();
+    </script>
+</body>
+</html>

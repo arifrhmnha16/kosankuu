@@ -1,0 +1,1 @@
+import{AuthPage}from"@/components/auth-page";export const metadata={title:"Lupa password",robots:{index:false,follow:false}};export default function Page(){return <AuthPage mode="forgot" title="Lupa password" description="Kami akan mengirim tautan pengaturan ulang melalui email."/>}

@@ -1,0 +1,1 @@
+import{AuthPage}from"@/components/auth-page";export const metadata={title:"Daftar tenant",robots:{index:false,follow:false}};export default function Page(){return <AuthPage mode="register" title="Daftar tenant" description="Buat akun untuk mulai mengajukan booking."/>}

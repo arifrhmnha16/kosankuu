@@ -1,0 +1,1 @@
+export function summarizeAmounts(rows: Array<{amount:number; status:string}>):Record<string,number> { return rows.reduce((a,row)=>({ total:a.total+row.amount, paid:a.paid+(row.status==="paid"?row.amount:0), pending:a.pending+(row.status==="pending"?row.amount:0), count:a.count+1 }),{total:0,paid:0,pending:0,count:0}); }

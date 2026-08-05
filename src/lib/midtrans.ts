@@ -1,0 +1,4 @@
+import { createHash } from "node:crypto";
+import type { PaymentStatus } from "@/types/domain";
+export function validMidtransSignature(orderId:string,statusCode:string,grossAmount:string,serverKey:string,signature:string){ return createHash("sha512").update(orderId+statusCode+grossAmount+serverKey).digest("hex") === signature; }
+export function mapMidtransStatus(transactionStatus:string,fraudStatus?:string):PaymentStatus { if(transactionStatus === "capture") return fraudStatus === "challenge" ? "pending" : "paid"; if(transactionStatus === "settlement") return "paid"; if(transactionStatus === "pending") return "pending"; if(transactionStatus === "expire") return "expired"; if(transactionStatus === "cancel") return "cancelled"; if(transactionStatus === "refund" || transactionStatus === "partial_refund") return "refunded"; return "failed"; }
