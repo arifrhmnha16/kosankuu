@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const schema = z.object({
   NEXT_PUBLIC_APP_NAME: z.string().default("Manzsa Residence"),
-  NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
+  NEXT_PUBLIC_APP_URL: z.string().url().default("https://kosankuu.vercel.app"),
   NEXT_PUBLIC_TIMEZONE: z.string().default("Asia/Jakarta"),
   SESSION_COOKIE_NAME: z.string().default("manzsa_session"),
   SESSION_EXPIRES_DAYS: z.coerce.number().int().min(1).max(14).default(7),
