@@ -14,3 +14,5 @@ firebase-debug.log
 *firebase-adminsdk*.json
 invoice-*.pdf
 .vercel/
+
+.vercel
