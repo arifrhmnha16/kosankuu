@@ -4,7 +4,6 @@ import { z } from "zod";
 import { getSession, owns } from "@/lib/auth/session";
 import { adminDb } from "@/lib/firebase/admin";
 import { apiError } from "@/lib/http";
-import { env } from "@/lib/env";
 const schema = z.object({ invoiceId: z.string().min(1) });
 export async function POST(req: Request) {
   const s = await getSession();
@@ -21,12 +20,13 @@ export async function POST(req: Request) {
       return apiError(new Error(invoice.status === "paid" ? "Tagihan sudah lunas." : "Tagihan tidak dapat dibayar pada status ini."), 409);
     if (!Number.isFinite(Number(invoice.totalAmount)) || Number(invoice.totalAmount) <= 0)
       return apiError(new Error("Nominal tagihan tidak valid."), 422);
+    const appOrigin = new URL(req.url).origin;
     const existing = await db.collection("payments")
       .where("invoiceId", "==", invoiceId)
       .where("status", "==", "pending")
       .limit(5)
       .get();
-    const resumable = existing.docs.find((item) => item.data().provider === "midtrans" && item.data().redirectUrl);
+    const resumable = existing.docs.find((item) => item.data().provider === "midtrans" && item.data().redirectUrl && item.data().appOrigin === appOrigin);
     if (resumable) {
       const payment = resumable.data();
       return NextResponse.json({ redirectUrl: payment.redirectUrl, orderId: payment.providerOrderId, resumed: true });
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
       clientKey: process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY || "",
     });
     const orderId = `MR-${invoiceId}-${Date.now()}`,
-      finishUrl = new URL("/tenant/pembayaran-selesai", env.NEXT_PUBLIC_APP_URL);
+      finishUrl = new URL("/tenant/pembayaran-selesai", appOrigin);
     finishUrl.searchParams.set("invoiceId", invoiceId);
     finishUrl.searchParams.set("midtrans_order_id", orderId);
     const transaction = await snap.createTransaction({
@@ -61,6 +61,7 @@ export async function POST(req: Request) {
         method: "midtrans",
         provider: "midtrans",
         providerOrderId: orderId,
+        appOrigin,
         redirectUrl: transaction.redirect_url,
         amount: invoice.totalAmount,
         status: "pending",
