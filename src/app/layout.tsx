@@ -11,4 +11,4 @@ import { env } from "@/lib/env";
 import { SmoothScroll } from "@/components/smooth-scroll";
 
 export const metadata:Metadata={metadataBase:new URL(env.NEXT_PUBLIC_APP_URL),title:{default:"Manzsa Residence",template:"%s | Manzsa Residence"},description:"Hunian nyaman dengan booking dan pengelolaan sewa yang jelas.",alternates:{canonical:"/"},openGraph:{title:"Manzsa Residence",description:"Hunian nyaman, hangat, dan terkelola.",type:"website",locale:"id_ID"},twitter:{card:"summary_large_image"}};
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="id"><body><SmoothScroll>{children}</SmoothScroll></body></html>}
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="id" data-scroll-behavior="smooth"><body><SmoothScroll>{children}</SmoothScroll></body></html>}

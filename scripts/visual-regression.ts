@@ -33,7 +33,7 @@ try {
     const page = await context.newPage();
     await page.goto("http://127.0.0.1:4174/aeline_landing_page.html", { waitUntil: "networkidle" });
     await page.addStyleTag({ path: compiledPrototypeCss });
-    await page.addStyleTag({ content: ".bg-primary{background-color:#c6f564!important}.text-primary{color:#c6f564!important}.bg-secondary{background-color:#1da1f2!important}.bg-surface{background-color:#f3f4f6!important}.bg-dark{background-color:#111827!important}.text-dark{color:#111827!important}.text-body{color:#6b7280!important}[data-public-header]{color:#fff}.border-white{border-color:#fff!important}.bg-white{background-color:#fff!important}" });
+    await page.addStyleTag({ content: ".bg-primary{background-color:#c6f564!important}.text-primary{color:#c6f564!important}.bg-secondary{background-color:#1da1f2!important}.bg-surface{background-color:#f3f4f6!important}.bg-dark{background-color:#111827!important}.text-dark{color:#111827!important}.text-body{color:#6b7280!important}[data-public-header]{color:#fff}.border-white{border-color:#fff!important}.bg-white{background-color:#fff!important}#beranda{background-image:linear-gradient(to bottom right,#1da1f2,#1269a4)!important;color:#fff!important}h1,h2,h3,h4,h5,h6{font-family:'Cormorant Garamond',serif!important}body,button,input,select,textarea{font-family:Montserrat,sans-serif!important}" });
     const prototypePath = path.join(output, `prototype-landing-${width}x${height}.png`); await page.screenshot({ path: prototypePath });
     await page.goto("http://127.0.0.1:3108", { waitUntil: "networkidle" });
     await page.addStyleTag({ content: "nextjs-portal{display:none!important}" });

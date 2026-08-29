@@ -1,7 +1,29 @@
 import type { PriceBreakdown, Pricing, RentalType } from "@/types/domain";
 
 const HOUR = 3_600_000, DAY = 86_400_000;
+export function validateBookingPeriod(type: RentalType, start: Date, end: Date, now = new Date()): string | null {
+  if (!Number.isFinite(start.getTime()) || !Number.isFinite(end.getTime()) || end <= start) return "Waktu booking tidak valid.";
+  if (start < now) return "Waktu mulai tidak boleh berada di masa lalu.";
+  const duration = end.getTime() - start.getTime();
+  if (type === "hourly" && (duration < HOUR || duration > 24 * HOUR || duration % HOUR !== 0)) return "Sewa per jam harus 1–24 jam penuh.";
+  if (type === "daily" && (duration < DAY || duration > 30 * DAY || duration % DAY !== 0)) return "Sewa harian harus 1–30 periode 24 jam.";
+  if (type === "monthly" && (duration < 28 * DAY || duration > 367 * DAY)) return "Sewa bulanan harus 1–12 bulan.";
+  if (type === "yearly") {
+    const expected = new Date(start);
+    expected.setUTCFullYear(expected.getUTCFullYear() + 1);
+    if (end.getTime() !== expected.getTime()) return "Sewa tahunan harus tepat satu tahun.";
+  }
+  return null;
+}
 export function overlaps(aStart: Date, aEnd: Date, bStart: Date, bEnd: Date) { return aStart < bEnd && bStart < aEnd; }
+export function isActiveBookingLock(expiresAt: Date | null | undefined, now = new Date()) {
+  return !expiresAt || expiresAt > now;
+}
+
+export function bookingBlocksAvailability(status: string, expiresAt: Date | null | undefined, now = new Date()) {
+  if (["confirmed", "active"].includes(status)) return true;
+  return ["pending_payment", "pending_approval"].includes(status) && isActiveBookingLock(expiresAt, now);
+}
 export function calculatePrice(pricing: Pricing, type: RentalType, start: Date, end: Date, additional = 0, discount = 0): PriceBreakdown {
   if (end <= start) throw new Error("Waktu selesai harus setelah waktu mulai.");
   const diff = end.getTime() - start.getTime();

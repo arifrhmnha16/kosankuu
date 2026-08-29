@@ -21,6 +21,10 @@ async function createServerSession(token: string) {
   });
 }
 
+function safeReturnPath(value: string | null) {
+  return value?.startsWith("/") && !value.startsWith("//") && !value.includes("\\") ? value : null;
+}
+
 export function AuthForm({ mode }: { mode: Mode }) {
   const router = useRouter();
   const params = useSearchParams();
@@ -81,8 +85,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
         }
         sessionStorage.setItem("verificationEmail", email);
         await signOut(auth);
-        router.push("/verifikasi-email");
-        router.refresh();
+        router.replace("/verifikasi-email");
         return;
       }
 
@@ -95,8 +98,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
       const body = await response.json();
       if (!response.ok) throw new Error(body.message || "Sesi tidak dapat dibuat.");
       const role = body.data?.role as "owner" | "tenant" | undefined;
-      router.push(params.get("next") || (role === "owner" ? "/owner" : "/"));
-      router.refresh();
+      router.replace(safeReturnPath(params.get("next")) || (role === "owner" ? "/owner" : "/"));
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Permintaan gagal. Silakan coba lagi.");
     } finally {

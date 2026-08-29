@@ -81,9 +81,11 @@ export default async function Page({
             <Image
               src={image.secureUrl}
               alt={image.altText || `Foto ${room.name}`}
-              fill
+              width={900}
+              height={600}
               priority
               sizes={index === 0 ? "(max-width: 900px) 100vw, 60vw" : "30vw"}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           </div>
         ))}

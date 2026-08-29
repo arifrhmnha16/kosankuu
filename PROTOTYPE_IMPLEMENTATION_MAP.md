@@ -26,7 +26,7 @@ Sumber visual: seluruh HTML/CSS/JS di `prototype/`. Status dicatat setelah corre
 | `tenant/profil.html` | `/tenant/profil` | `ProfileForm` | profile form/avatar/card tokens | Close | controlled uploader UI differs slightly |
 | `owner/index.html` | `/owner` | owner dashboard + `DashboardShell` | blue owner hero, metrics, dark sidebar | Close | charts depend on real aggregate availability |
 | `owner/kamar.html` | `/owner/kamar` | `OwnerSection`, `RoomForm` | table/modal/toolbar/photo tokens | Close | real columns differ from demo dataset |
-| `owner/booking.html` | `/owner/booking` | owner list/detail/actions | table/status/action tokens | Close | dedicated manual booking dialog remains absent |
+| `owner/booking.html` | `/owner/booking` | owner list/detail/actions + `OwnerBookingForm` | table/status/action/form tokens | Close | data dinamis dapat mengubah tinggi tabel |
 | `owner/tenant.html` | `/owner/tenant` | owner list/detail | table/detail/tabs tokens | Close | — |
 | `owner/pembayaran.html` | `/owner/pembayaran` | owner list/detail | table/modal/status tokens | Close | secure proof rendering depends on credentials |
 | `owner/invoice.html` | `/owner/invoice` | owner list/detail | invoice/table tokens | Close | — |

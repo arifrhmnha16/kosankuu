@@ -6,7 +6,7 @@ service cloud.firestore {
     function tenant(uid) { return signedIn() && request.auth.uid == uid; }
     function immutableRole() { return !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role','uid','status']); }
 
-    match /rooms/{id} { allow read: if owner() || (resource.data.isPublic == true && resource.data.status != 'inactive' && (!('archivedAt' in resource.data) || resource.data.archivedAt == null)); allow write: if false; }
+    match /rooms/{id} { allow read: if owner() || (resource.data.isPublic == true && resource.data.status != 'inactive' && resource.data.status != 'maintenance' && (!('archivedAt' in resource.data) || resource.data.archivedAt == null)); allow write: if false; }
     match /propertySettings/{id} { allow read: if resource.data.isPublic == true || owner(); allow write: if false; }
     match /facilities/{id} { allow read: if resource.data.isPublic == true || owner(); allow write: if false; }
     match /gallery/{id} { allow read: if resource.data.isPublic == true || owner(); allow write: if false; }
@@ -17,7 +17,7 @@ service cloud.firestore {
     match /complaints/{id} { allow read: if owner() || (signedIn() && resource.data.tenantId == request.auth.uid); allow write: if false; match /histories/{history} { allow read: if owner() || (signedIn() && get(/databases/$(database)/documents/complaints/$(id)).data.tenantId == request.auth.uid); allow write: if false; } }
     match /announcements/{id} { allow read: if owner() || (signedIn() && resource.data.status == 'published' && (!('publishedAt' in resource.data) || resource.data.publishedAt <= request.time) && (!('expiresAt' in resource.data) || resource.data.expiresAt == null || resource.data.expiresAt > request.time) && (resource.data.audienceType == 'all' || (resource.data.audienceType == 'tenant' && resource.data.targetUserId == request.auth.uid) || (resource.data.audienceType == 'room' && resource.data.targetRoomId == get(/databases/$(database)/documents/users/$(request.auth.uid)).data.activeRoomId))); allow write: if false; }
     match /notifications/{id} { allow read: if owner() || (signedIn() && resource.data.userId == request.auth.uid); allow write: if false; }
-    match /activities/{id} { allow read: if owner() || (signedIn() && resource.data.actorId == request.auth.uid); allow write: if false; }
+    match /activities/{id} { allow read: if owner() || (signedIn() && resource.data.tenantId == request.auth.uid); allow write: if false; }
     match /bookingLocks/{id} { allow read, write: if false; }
     match /counters/{id} { allow read, write: if false; }
     match /emailEvents/{id} { allow read, write: if false; }

@@ -18,7 +18,7 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     await assertSameOrigin(req);
-    rateLimit(
+    await rateLimit(
       `session:${req.headers.get("x-forwarded-for") || "local"}`,
       20,
       60_000,
@@ -35,13 +35,14 @@ export async function POST(req: Request) {
         "Verifikasi email sebelum login.",
         403,
       );
-    let sendWelcome = false;
-    if (decoded.role === "tenant") {
-      const userReference = adminDb().doc(`users/${decoded.uid}`);
-      const profile = await userReference.get();
-      sendWelcome = profile.data()?.emailVerified !== true;
-      await userReference.set({ emailVerified: true }, { merge: true });
-    }
+    const userReference = adminDb().doc(`users/${decoded.uid}`);
+    const profile = await userReference.get();
+    if (!profile.exists || profile.data()?.role !== decoded.role)
+      throw new AppError("PROFILE_MISMATCH", "Profil dan hak akses akun tidak konsisten.", 403);
+    if (profile.data()?.status !== "active" || profile.data()?.disabled === true)
+      throw new AppError("ACCOUNT_DISABLED", "Akun tidak aktif.", 403);
+    const sendWelcome = decoded.role === "tenant" && profile.data()?.emailVerified !== true;
+    if (decoded.role === "tenant") await userReference.set({ emailVerified: true }, { merge: true });
     const expiresIn = env.SESSION_EXPIRES_DAYS * 86400000,
       cookie = await adminAuth().createSessionCookie(token, { expiresIn }),
       res = Response.json(

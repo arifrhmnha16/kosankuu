@@ -1,0 +1,17 @@
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { rupiah } from "@/lib/format";
+
+export function OwnerBookingForm({ rooms, tenants }: { rooms: Record<string, unknown>[]; tenants: Record<string, unknown>[] }) {
+  const router = useRouter(), [open, setOpen] = useState(false), [busy, setBusy] = useState(false), [message, setMessage] = useState(""), [preview, setPreview] = useState<Record<string, unknown> | null>(null);
+  async function submit(input: React.FormEvent<HTMLFormElement> | HTMLFormElement, final: boolean) {
+    const formElement = input instanceof HTMLFormElement ? input : input.currentTarget;
+    if (!(input instanceof HTMLFormElement)) input.preventDefault();
+    setBusy(true); setMessage("");
+    const form = new FormData(formElement), body = { roomId: String(form.get("roomId")), tenantId: String(form.get("tenantId")), rentalType: String(form.get("rentalType")), startAt: new Date(String(form.get("startAt"))).toISOString(), endAt: new Date(String(form.get("endAt"))).toISOString() };
+    try { const response = await fetch(final ? "/api/bookings" : "/api/bookings/preview", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) }); const data = await response.json(); if (!response.ok) throw new Error(data.message || "Booking tidak dapat diproses."); if (final) { setMessage("Booking manual berhasil dibuat."); setOpen(false); router.refresh(); } else setPreview(data.data); } catch (error) { setMessage(error instanceof Error ? error.message : "Booking tidak dapat diproses."); } finally { setBusy(false); }
+  }
+  if (!open) return <p><button className="button dark" onClick={() => setOpen(true)}>Buat booking manual</button></p>;
+  return <form className="card form" onSubmit={(event) => void submit(event, true)}><h2>Booking manual</h2><div className="grid three"><div className="field"><label>Tenant</label><select className="input" name="tenantId" required>{tenants.map((tenant) => <option key={String(tenant.id)} value={String(tenant.id)}>{String(tenant.fullName || tenant.email)}</option>)}</select></div><div className="field"><label>Kamar</label><select className="input" name="roomId" required>{rooms.filter((room) => !room.archivedAt).map((room) => <option key={String(room.id)} value={String(room.id)}>{String(room.name)}</option>)}</select></div><div className="field"><label>Tipe sewa</label><select className="input" name="rentalType"><option value="hourly">Per jam</option><option value="daily">Per 24 jam</option><option value="monthly">Bulanan</option><option value="yearly">Tahunan</option></select></div><div className="field"><label>Mulai</label><input className="input" name="startAt" type="datetime-local" required /></div><div className="field"><label>Selesai</label><input className="input" name="endAt" type="datetime-local" required /></div></div>{preview && <div className="alert success">Tersedia · Total {rupiah(Number((preview.price as Record<string, unknown>)?.total || 0))}</div>}{message && <div className={message.includes("berhasil") ? "alert success" : "alert"}>{message}</div>}<div className="actions"><button type="button" className="button outline" disabled={busy} onClick={(event) => void submit(event.currentTarget.form!, false)}>Periksa harga</button><button className="button dark" disabled={busy || !preview}>{busy ? "Memproses…" : "Buat booking"}</button><button type="button" className="button outline" onClick={() => setOpen(false)}>Batal</button></div></form>;
+}

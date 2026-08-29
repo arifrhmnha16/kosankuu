@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -17,7 +18,8 @@ export function TenantDetail({
     [reason, setReason] = useState(""),
     [message, setMessage] = useState(""),
     status = String(record.status || ""),
-    snapshot = record.snapshot as Record<string, unknown> | undefined;
+    snapshot = record.snapshot as Record<string, unknown> | undefined,
+    attachments = Array.isArray(record.attachments) ? record.attachments : [];
   async function action(url: string, body: unknown, success: string) {
     const res = await fetch(url, {
         method: "POST",
@@ -53,6 +55,16 @@ export function TenantDetail({
                     <p>{String(h.message || "")}</p>
                     <small>{String(h.createdAt || "")}</small>
                   </div>
+                ))}
+              </div>
+            </>
+          )}
+          {section === "keluhan" && attachments.length > 0 && (
+            <>
+              <h2>Lampiran</h2>
+              <div className="gallery-grid">
+                {attachments.map((_, index) => (
+                  <Image key={index} src={`/api/private-assets/complaint/${record.id}/${index}`} alt={`Lampiran keluhan ${index + 1}`} width={480} height={360} unoptimized />
                 ))}
               </div>
             </>

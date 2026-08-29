@@ -1,1 +1,7 @@
-"use client";export default function ErrorPage({reset}:{error:Error&{digest?:string};reset:()=>void}){return <main className="section"><div className="container empty"><h1>Halaman gagal dimuat</h1><p className="muted">Terjadi kendala sementara. Silakan coba kembali.</p><button className="button dark" onClick={reset}>Coba lagi</button></div></main>}
+"use client";
+import { useEffect } from "react";
+
+export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  useEffect(() => { console.error("Application route error", { digest: error.digest }); }, [error]);
+  return <main className="container" style={{ paddingBlock: 140 }}><div className="empty"><h1>Halaman belum dapat dimuat</h1><p className="muted">Terjadi gangguan saat mengambil data. Data palsu tidak ditampilkan.</p><button className="button dark" onClick={reset}>Coba lagi</button></div></main>;
+}

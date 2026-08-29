@@ -2,7 +2,7 @@ import { FieldValue, Timestamp } from "firebase-admin/firestore";
 import { bookingInput } from "@/lib/validation";
 import { getSession } from "@/lib/auth/session";
 import { adminDb } from "@/lib/firebase/admin";
-import { calculatePrice, invoiceNumber, lockIds } from "@/lib/booking";
+import { calculatePrice, invoiceNumber, isActiveBookingLock, lockIds, validateBookingPeriod } from "@/lib/booking";
 import { AppError, resultError, success } from "@/lib/errors";
 import type { Room } from "@/types/domain";
 
@@ -16,6 +16,8 @@ export async function POST(request: Request) {
     const tenantId = session.role === "owner" ? input.tenantId : session.uid;
     if (!tenantId) throw new AppError("VALIDATION_ERROR", "Tenant wajib dipilih untuk booking manual.", 422);
     const start = new Date(input.startAt), end = new Date(input.endAt), db = adminDb();
+    const periodError = validateBookingPeriod(input.rentalType, start, end);
+    if (periodError) throw new AppError("INVALID_BOOKING_PERIOD", periodError, 422);
     const bookingRef = db.collection("bookings").doc(), invoiceRef = db.collection("invoices").doc(), roomRef = db.doc(`rooms/${input.roomId}`);
     const tenantRef = db.doc(`users/${tenantId}`), settingsRef = db.doc("propertySettings/main");
     const counterRef = db.doc(`counters/invoice-${new Date().toISOString().slice(0, 7).replace("-", "")}`);
@@ -25,10 +27,10 @@ export async function POST(request: Request) {
       if (!roomDoc.exists) throw new AppError("NOT_FOUND", "Kamar tidak ditemukan.", 404);
       if (!tenantDoc.exists || tenantDoc.data()?.role !== "tenant" || tenantDoc.data()?.isActive === false) throw new AppError("TENANT_UNAVAILABLE", "Tenant tidak aktif atau tidak ditemukan.", 409);
       const room = { id: roomDoc.id, ...roomDoc.data() } as Room;
-      if (room.archivedAt || !["available", "reserved", "occupied"].includes(room.status) || !room.rentalTypes.includes(input.rentalType)) throw new AppError("ROOM_UNAVAILABLE", "Kamar atau tipe sewa tidak tersedia.", 409);
+      if (room.archivedAt || !["available", "reserved", "occupied"].includes(room.status) || !room.rentalTypes.includes(input.rentalType) || (session.role === "tenant" && !room.isPublic)) throw new AppError("ROOM_UNAVAILABLE", "Kamar atau tipe sewa tidak tersedia.", 409);
       const lockRefs = locks.map((id) => db.doc(`bookingLocks/${id}`));
       const lockDocs = await transaction.getAll(...lockRefs);
-      if (lockDocs.some((doc) => doc.exists && (!doc.data()?.expiresAt || doc.data()!.expiresAt.toDate() > new Date()))) throw new AppError("BOOKING_CONFLICT", "Jadwal baru saja dipilih pengguna lain.", 409);
+      if (lockDocs.some((doc) => doc.exists && isActiveBookingLock(doc.data()?.expiresAt?.toDate?.()))) throw new AppError("BOOKING_CONFLICT", "Jadwal baru saja dipilih pengguna lain.", 409);
       const price = calculatePrice(room.pricing, input.rentalType, start, end);
       const counter = await transaction.get(counterRef), sequence = (counter.data()?.currentValue ?? 0) + 1;
       const number = invoiceNumber(new Date().toISOString().slice(0, 7).replace("-", ""), sequence);

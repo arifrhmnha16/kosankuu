@@ -21,6 +21,7 @@ export function OwnerDetail({
     [reason, setReason] = useState("");
   const status = String(record.status || ""),
     proof = record.proof as { secureUrl?: string } | undefined,
+    attachments = Array.isArray(record.attachments) ? record.attachments : [],
     snapshot = record.snapshot as
       | Record<string, Record<string, unknown>>
       | undefined;
@@ -89,11 +90,22 @@ export function OwnerDetail({
             <>
               <h2>Bukti transfer</h2>
               <Image
-                src={String(proof.secureUrl)}
+                src={`/api/private-assets/payment/${record.id}/0`}
                 alt="Bukti transfer tenant"
                 width={480}
                 height={360}
+                unoptimized
               />
+            </>
+          )}
+          {section === "keluhan" && attachments.length > 0 && (
+            <>
+              <h2>Lampiran keluhan</h2>
+              <div className="gallery-grid">
+                {attachments.map((_, index) => (
+                  <Image key={index} src={`/api/private-assets/complaint/${record.id}/${index}`} alt={`Lampiran keluhan ${index + 1}`} width={480} height={360} unoptimized />
+                ))}
+              </div>
             </>
           )}
         </div>
